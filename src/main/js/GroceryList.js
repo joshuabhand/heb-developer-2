@@ -12,6 +12,13 @@ export default class GroceryList extends React.Component{
 					<tr>
 						<th>ID</th>
 						<th>Description</th>
+						<th>Last Sold</th>
+						<th>Shelf Life</th>
+						<th>Department</th>
+						<th>Price</th>
+						<th>Unit</th>
+						<th>xFor</th>
+						<th>Cost</th>
 					</tr>
 					{groceries}
 				</tbody>
