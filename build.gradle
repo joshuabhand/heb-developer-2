@@ -21,11 +21,16 @@ repositories {
     mavenCentral()
 }
 
+task webpack(type: Exec) {
+    commandLine "$projectDir/node_modules/.bin/webpack", "app/index.js", "$buildDir/js/bundle.js"
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
