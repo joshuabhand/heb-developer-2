@@ -19,7 +19,8 @@ public class Application implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-
+//        MongoDB safe from SQL injection?
+//        https://stackoverflow.com/questions/5021456/how-does-mongodb-avoid-the-sql-injection-mess
         repository.deleteAll();
 
         // save a couple of groceries
@@ -45,27 +46,27 @@ public class Application implements CommandLineRunner
         repository.save(new Grocery("9000005","Pain","9/24/2017","365d","Pharmacy"," $2.89 ","Each","1"," $1.00"));
 
         // fetch all groceries
-        System.out.println();
-        System.out.println("Groceries found with findAll():");
-        System.out.println("-------------------------------");
-        for (Grocery grocery : repository.findAll()) {
-            System.out.println(grocery);
-        }
-        System.out.println();
-        System.out.println();
-
-        // fetch an item
-        System.out.println("Groceries found with findByID('753542'):");
-        System.out.println("--------------------------------");
-        System.out.println(repository.findByid("753542"));
-        System.out.println();
-
-        System.out.println("Groceries found with findByDescription('apples'):");
-        System.out.println("--------------------------------");
-        for (Grocery grocery: repository.findByDescription("apples")) {
-            System.out.println(grocery);
-        }
-        System.out.println();
+//        System.out.println();
+//        System.out.println("Groceries found with findAll():");
+//        System.out.println("-------------------------------");
+//        for (Grocery grocery : repository.findAll()) {
+//            System.out.println(grocery);
+//        }
+//        System.out.println();
+//        System.out.println();
+//
+//        // fetch an item
+//        System.out.println("Groceries found with findByID('753542'):");
+//        System.out.println("--------------------------------");
+//        System.out.println(repository.findByid("753542"));
+//        System.out.println();
+//
+//        System.out.println("Groceries found with findByDescription('apples'):");
+//        System.out.println("--------------------------------");
+//        for (Grocery grocery: repository.findByDescription("apples")) {
+//            System.out.println(grocery);
+//        }
+//        System.out.println();
     }
 
 }
