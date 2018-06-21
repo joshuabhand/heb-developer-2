@@ -4,9 +4,9 @@ I created a simple web app which displays and searches groceries.
 
 ## Design
 
-*Front-end: React.js 
-*API: Spring
-*Database: MongoDB
+* Front-end: React.js 
+* API: Spring
+* Database: MongoDB
 
 ## Deployment
 
