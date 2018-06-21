@@ -55,7 +55,8 @@ class App extends React.Component {
 	render() {
 		return (
 		    <div>
-		        <form onSubmit={this.handleSubmit}>
+		        <label htmlFor="form">Search by Description or Department</label>
+		        <form id="form" onSubmit={this.handleSubmit}>
                      <input
                        name="description"
                        placeholder="Search by description"
