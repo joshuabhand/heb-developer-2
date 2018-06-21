@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "groceries", path = "groceries")
-public interface GroceryRepository extends MongoRepository<Grocery, String>, CustomGroceryRepository {
+public interface GroceryRepository extends MongoRepository<Grocery, String> {
     List<Grocery> findByDescription(@Param("description") String description);
+    List<Grocery> findByDepartment(@Param("department") String department);
     Grocery findByid(@Param("id") String id);
 }

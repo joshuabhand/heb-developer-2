@@ -2,6 +2,12 @@
 
 I created a simple web app which displays and searches groceries.
 
+## Design
+
+Front-end: React.js 
+API: Spring
+Database: MongoDB
+
 ## Deployment
 
 1) Start up mongoDB

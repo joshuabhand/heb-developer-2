@@ -3,53 +3,54 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import rest from 'rest';
 import mime from 'rest/interceptor/mime';
-import entity from 'rest/interceptor/entity';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {groceries: [], query: ''};
+		this.state = {groceries: [], query: '', departmentQuery: '', descriptionQuery: ''};
+
 		this.handleSubmit = this.handleSubmit.bind(this);
-//		this.getInfo = this.getInfo.bind(this);
+		this.handleInputDepartment = this.handleInputDepartment.bind(this);
+		this.handleInputDescription = this.handleInputDescription.bind(this);
 	}
 
 	componentDidMount() {
-	    let client = rest
-            .chain(mime, { mime: 'application/json' })
-            .chain(entity);
+        let client = rest.wrap(mime, { mime: 'application/json' });
 
 		client({method: 'GET', path: '/groceries'}).done(response => {
-			this.setState({groceries: response._embedded.groceries});
+			this.setState({groceries: response.entity._embedded.groceries});
 		});
 	}
 
+	handleInputDescription(event) {
+	    this.setState({descriptionQuery: event.target.value, departmentQuery: ''});
+	}
+
+	handleInputDepartment(event) {
+	    this.setState({departmentQuery: event.target.value, descriptionQuery: ''});
+	}
+
 	handleSubmit(event) {
-//            this.setState({
-//                groceries: this.state.groceries,
-//                query: event.currentTarget.item.value});
             event.preventDefault();
 
-//            console.log("what: " + JSON.stringify(event.currentTarget.item.value));
-//            console.log("handleSubmit query: " + JSON.stringify(event.current));
-//            console.log("handleSubmit state.query: " + JSON.stringify(this.state.query));
+            let client = rest.wrap(mime, { mime: 'application/json' });
 
-            let client = rest
-                  .chain(mime, { mime: 'application/json' })
-                  .chain(entity);
-
-            if(event.currentTarget.description.value) {
-                client({method: 'GET', path: `groceries/search/findByDescription?description=${event.currentTarget.description.value}`}).done(response => {
-                    this.setState({groceries: response._embedded.groceries});
+            if(this.state.descriptionQuery) {
+                client({method: 'GET', path: `groceries/search/findByDescription?description=${this.state.descriptionQuery}`}).done(response => {
+                    this.setState({groceries: response.entity._embedded.groceries});
                 });
             }
+            else if(this.state.departmentQuery) {
+                 client({method: 'GET', path: `groceries/search/findByDepartment?department=${this.state.departmentQuery}`}).done(response => {
+                     this.setState({groceries: response.entity._embedded.groceries});
+                 });
+             }
             else {
                 client({method: 'GET', path: '/groceries'}).done(response => {
-                			this.setState({groceries: response._embedded.groceries});
-                		});
+                    this.setState({groceries: response.entity._embedded.groceries});
+                });
             }
-        }
-
-
+    }
 
 	render() {
 		return (
@@ -58,8 +59,15 @@ class App extends React.Component {
                      <input
                        name="description"
                        placeholder="Search by description"
-                       ref={input => this.search = input}
+                       value={this.state.descriptionQuery}
+                       onChange={this.handleInputDescription}
                      />
+                     <input
+                        name="department"
+                        placeholder="Search by department"
+                        value={this.state.departmentQuery}
+                        onChange={this.handleInputDepartment}
+                      />
                     <input type="submit" value="Search" />
                </form>
 			    <GroceryList groceries={this.state.groceries} />
