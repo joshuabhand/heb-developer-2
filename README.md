@@ -30,6 +30,7 @@ java -jar build/libs/gs-rest-service-0.1.0.jar
 * [Gradle](https://gradle.org/) - Dependency Management and build scripts
 * [Github](https://github.com/) - Code control
 * [Postman](https://www.getpostman.com/) - API testing
+* [Node](https://nodejs.org/en/) - npm modules
 
 ## Versioning
 
